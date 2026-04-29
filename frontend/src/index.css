@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  /* India Theme: Deep Indigo / Orange / Emerald */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-500: #4f46e5;
+  --color-primary-600: #4338ca;
+  --color-primary-700: #3730a3;
+  --color-secondary-500: #ea580c; /* Saffron/Orange tone */
+  --color-accent-500: #059669; /* Emerald Green tone */
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+button, a, select, [role="button"] {
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* High Contrast Mode Utilities */
+@media (forced-colors: active) {
+  .high-contrast-outline {
+    outline: 2px solid CanvasText;
+  }
+}

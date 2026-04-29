@@ -1,0 +1,41 @@
+{
+  "upcoming_elections": {
+    "assembly_2026": [
+      { "state": "Assam", "expected_month": "April-May 2026" },
+      { "state": "Kerala", "expected_month": "April-May 2026" },
+      { "state": "Tamil Nadu", "expected_month": "April-May 2026" },
+      { "state": "West Bengal", "expected_month": "April-May 2026" },
+      { "state": "Puducherry", "expected_month": "April-May 2026" }
+    ],
+    "lok_sabha": {
+      "cycle": "2029",
+      "expected": "Expected around April-May 2029"
+    }
+  },
+  "timeline": [
+    { "date": "Step 1", "title": "Check Eligibility", "description": "Ensure you are 18+, an Indian citizen, and ordinarily resident in the polling area.", "link": "/eligibility" },
+    { "date": "Step 2", "title": "Form 6 Registration", "description": "Apply for voter registration online via NVSP / Voter Helpline App or offline via BLO.", "link": "https://voters.eci.gov.in/" },
+    { "date": "Step 3", "title": "Check Electoral Roll", "description": "Verify your name is present in the voter list using ECI's Electoral Search portal.", "link": "https://electoralsearch.eci.gov.in/" },
+    { "date": "Step 4", "title": "Find Polling Booth", "description": "Identify your designated polling station online or via the Voter Helpline App.", "link": "https://electoralsearch.eci.gov.in/" },
+    { "date": "Step 5", "title": "Voting Day (EVM/VVPAT)", "description": "Go to the booth with valid ID. Press the blue button on the EVM against your choice and verify the printed slip in the VVPAT window for 7 seconds.", "link": "/documents" }
+  ],
+  "documents": {
+    "primary": [
+      "EPIC (Voter ID Card)"
+    ],
+    "alternatives": [
+      "Aadhaar Card",
+      "PAN Card",
+      "Driving License",
+      "Indian Passport",
+      "MNREGA Job Card",
+      "Passbook with photograph issued by Bank/Post Office",
+      "Smart Card issued by RGI under NPR",
+      "Health Insurance Smart Card issued under the scheme of Ministry of Labour",
+      "Pension document with photograph",
+      "Official identity cards issued to MPs/MLAs/MLCs",
+      "Service Identity Cards with photograph issued by Central/State Govt./PSUs"
+    ],
+    "note": "Even if you have an EPIC card, your name MUST be in the Electoral Roll (Voter List) to cast a vote."
+  }
+}
