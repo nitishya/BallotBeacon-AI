@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, Check, ChevronRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useLanguage } from '../store/LanguageContext';
-import { config } from '../config';
+import { API_URL } from '../config';
 
 interface TimelineEvent {
   date: string;
@@ -34,7 +34,7 @@ export default function Wizard() {
     async function fetchTimeline() {
       setIsLoading(true);
       try {
-        const res = await fetch(`${config.ENDPOINTS.TIMELINE}?lang=${language}`);
+        const res = await fetch(`${API_URL}/timeline?lang=${language}`);
         if (!res.ok) throw new Error('Failed to fetch timeline');
         const data = await res.json();
         setEvents(data);

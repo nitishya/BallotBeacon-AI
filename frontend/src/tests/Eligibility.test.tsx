@@ -1,12 +1,10 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import type { ReactElement } from 'react';
 import Eligibility from '../pages/Eligibility';
 import { LanguageProvider } from '../store/LanguageContext';
 
-// Mock fetch
-global.fetch = vi.fn();
-
-const renderWithLang = (ui: React.ReactElement) => {
+const renderWithLang = (ui: ReactElement) => {
   return render(
     <LanguageProvider>
       {ui}
@@ -15,6 +13,10 @@ const renderWithLang = (ui: React.ReactElement) => {
 };
 
 describe('Eligibility Component', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
   it('renders all form fields correctly', () => {
     renderWithLang(<Eligibility />);
     
@@ -25,7 +27,7 @@ describe('Eligibility Component', () => {
   });
 
   it('shows loading state on submit', async () => {
-    (global.fetch as any).mockResolvedValueOnce({
+    (fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       ok: true,
       json: async () => ({ is_eligible: true, reasons: [], next_steps: [] })
     });

@@ -1,20 +1,32 @@
-# Python
-backend/venv/
-backend/__pycache__/
-backend/*.pyc
-backend/.env
-backend/.pytest_cache/
-
-# Node
-frontend/node_modules/
-frontend/.vite/
-frontend/dist/
-frontend/dist-ssr/
-frontend/*.local
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Deployment
-deploy.sh
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

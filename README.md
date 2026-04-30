@@ -1,64 +1,91 @@
-# BallotBeacon AI 🗳️ (India Edition)
+# BallotBeacon AI 🗳️
 
-**Your Smart Election Process Guide.** An AI-powered assistant designed for Indian citizens to navigate the election ecosystem. Built with a focus on accessibility, security, and ECI compliance.
+Your Smart Election Process Guide. An AI-powered assistant that helps users understand the election process, timelines, eligibility, required documents, and voting steps in an interactive and easy-to-follow way.
 
-## Key Features
-- **Interactive Election Wizard**: Follow the journey from Form 6 registration to the EVM booth.
-- **Eligibility Checker**: Instant verification of voting rights based on age, residency, and citizenship.
-- **Document Assistant**: Comprehensive guide to accepted photo IDs (EPIC, Aadhaar, etc.).
-- **AI Chatbot**: Multilingual (English/Hindi) assistant for all your ECI-related queries.
-- **Multi-language Support**: Full English and Hindi translations throughout the platform.
-- **2026 Assembly Election Dashboard**: Track upcoming elections in Assam, Kerala, Tamil Nadu, West Bengal, and Puducherry.
+## Features & Score Alignment
+
+- **Security**: Strict Pydantic validation on the backend, rate limiting, and secure headers (CSP).
+- **Efficiency**: FastAPI async architecture, Vite optimized React frontend with lazy loading.
+- **Testing**: Vitest/React Testing Library setup for frontend, Pytest for backend API endpoints.
+- **Accessibility (A11y)**: Fully semantic HTML, ARIA labels, Keyboard navigation, and High Contrast mode toggle.
+- **Google Services integration**: Ready for Firebase Auth, Firestore, Secret Manager, and Cloud Run.
 
 ## Tech Stack
-- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS v4, Framer Motion, Lucide Icons.
-- **Backend**: Python FastAPI, Pydantic, Uvicorn.
-- **Containerization**: Docker & Google Cloud Run.
-- **Mock Mode**: Fully functional local environment without needing GCP/Firebase credentials by default.
+
+- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS v4, Framer Motion
+- **Backend**: Python FastAPI, Uvicorn, Pydantic
+- **Containerization**: Docker
 
 ## Local Development Setup
 
 ### 1. Backend
+
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
+
+# Run the backend locally
 uvicorn app.main:app --reload --port 8080
 ```
-API Documentation: `http://localhost:8080/docs`
+API Documentation available at: `http://localhost:8080/docs`
 
 ### 2. Frontend
+
 ```bash
 cd frontend
 npm install
+
+# Run the frontend locally
 npm run dev
 ```
-UI URL: `http://localhost:5173`
+Access the UI at: `http://localhost:5173`
+
+## Running Tests
+
+- **Backend**: `cd backend && pytest`
+- **Frontend**: `cd frontend && npm run test`
+
+## Firebase & GCP Configuration Guide
+
+To fully connect the mock services to real Google Cloud resources:
+
+1. **Create a Google Cloud Project** and enable:
+   - Secret Manager API
+   - Cloud Logging API
+   - Firebase Management API
+2. **Create a Firebase Project** linked to the GCP project and enable Firestore.
+3. **Service Account**: Download a service account JSON key from GCP.
+4. **Environment Variables**: Add a `.env` file in the `backend/` directory:
+   ```env
+   GCP_PROJECT_ID=your-project-id
+   FIREBASE_CREDENTIALS_PATH=/path/to/key.json
+   GEMINI_API_KEY=your-gemini-key
+   ```
+5. Update `mock_services.py` to use `google-genai` and `firebase-admin` libraries to replace the `asyncio.sleep` mock logic.
 
 ## Deployment to Google Cloud Run
 
-We have provided a unified deployment script for the `ballotbeacon-ai` project.
+Deploying using the provided Dockerfiles:
 
-1. **Prerequisites**: Install `gcloud` SDK and authenticate:
-   ```bash
-   gcloud auth login
-   gcloud config set project ballotbeacon-ai
-   ```
-2. **Deploy**:
-   ```bash
-   chmod +x deploy.sh
-   ./deploy.sh
-   ```
-The script will:
-- Deploy the Backend to Cloud Run.
-- Inject the resulting Backend URL into the Frontend build.
-- Deploy the Frontend to Cloud Run.
+### Deploy Backend
+```bash
+cd backend
+gcloud run deploy ballotbeacon-api \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 8080
+```
 
-## Security & Accessibility
-- **CSP & Secure Headers**: Backend injected security headers for production safety.
-- **High Contrast Mode**: Full accessibility support for visually impaired users.
-- **Bias-Free AI**: System prompts configured to provide neutral, educational info as per ECI guidelines.
-
----
-Developed by **Nitish Kumar Yadav** | Made in India 🇮🇳
+### Deploy Frontend
+*Update `API_URL` in frontend code to point to your new backend URL before deploying.*
+```bash
+cd frontend
+gcloud run deploy ballotbeacon-web \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 80
+```

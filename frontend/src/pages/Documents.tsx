@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FileText, AlertCircle, CheckCircle, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../store/LanguageContext';
+import { API_URL } from '../config';
 
 export default function Documents() {
   const { language } = useLanguage();
@@ -22,7 +23,7 @@ export default function Documents() {
     async function fetchDocs() {
       setIsLoading(true);
       try {
-        const res = await fetch(`http://localhost:8080/api/v1/documents?lang=${language}`);
+        const res = await fetch(`${API_URL}/documents?lang=${language}`);
         if (res.ok) {
           const json = await res.json();
           setData(json);

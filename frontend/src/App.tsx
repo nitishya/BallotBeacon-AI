@@ -1,14 +1,14 @@
-import React, { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { LanguageProvider } from './store/LanguageContext';
 
 // Lazy loading for efficiency/high score
-const Home = React.lazy(() => import('./pages/Home'));
-const Wizard = React.lazy(() => import('./pages/Wizard'));
-const Eligibility = React.lazy(() => import('./pages/Eligibility'));
-const Documents = React.lazy(() => import('./pages/Documents'));
-const AskAI = React.lazy(() => import('./pages/AskAI'));
+const Home = lazy(() => import('./pages/Home'));
+const Wizard = lazy(() => import('./pages/Wizard'));
+const Eligibility = lazy(() => import('./pages/Eligibility'));
+const Documents = lazy(() => import('./pages/Documents'));
+const AskAI = lazy(() => import('./pages/AskAI'));
 
 // Loading component for accessibility and UX
 const PageLoader = () => (

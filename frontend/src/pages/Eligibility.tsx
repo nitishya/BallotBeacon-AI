@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useLanguage } from '../store/LanguageContext';
-import { config } from '../config';
+import { API_URL as BASE_API_URL } from '../config';
 
-const API_URL = config.ENDPOINTS.ELIGIBILITY_CHECK;
+const API_URL = `${BASE_API_URL}/eligibility-check`;
 
 interface EligibilityResult {
   is_eligible: boolean;

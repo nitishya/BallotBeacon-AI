@@ -8,16 +8,21 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     
     # CORS
-    BACKEND_CORS_ORIGINS: list[str] = ["*"] # In production, restrict this
+    # In production, this should be set to your frontend URL
+    BACKEND_CORS_ORIGINS: list[str] = ["*"] 
     
     # GCP / Firebase
-    GCP_PROJECT_ID: str = "dummy-project-id"
+    GCP_PROJECT_ID: str = "ballotbeacon-ai"
     FIREBASE_CREDENTIALS_PATH: Optional[str] = None
     
     # Gemini
     GEMINI_API_KEY: Optional[str] = None
 
-    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
+    model_config = SettingsConfigDict(
+        env_file=".env", 
+        case_sensitive=True,
+        extra="ignore"
+    )
 
 @lru_cache
 def get_settings() -> Settings:

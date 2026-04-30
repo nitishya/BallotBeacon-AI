@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Clock, ShieldCheck, HelpCircle, MapPin } from 'lucide-react';
 import { useLanguage } from '../store/LanguageContext';
-import { config } from '../config';
+import { API_URL } from '../config';
 
 interface UpcomingElection {
   state: string;
@@ -15,7 +15,7 @@ export default function Home() {
   const [elections, setElections] = useState<UpcomingElection[]>([]);
 
   useEffect(() => {
-    fetch(`${config.ENDPOINTS.UPCOMING_ELECTIONS}?lang=${language}`)
+    fetch(`${API_URL}/upcoming-elections?lang=${language}`)
       .then(res => res.json())
       .then(data => {
         if (data.assembly_2026) {

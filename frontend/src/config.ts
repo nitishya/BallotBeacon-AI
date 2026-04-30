@@ -1,12 +1,15 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+// Centralized configuration for the frontend
+// Use import.meta.env for Vite environment variables
 
-export const config = {
-  API_BASE_URL,
-  API_V1_STR: '/api/v1',
-  ENDPOINTS: {
-    TIMELINE: `${API_BASE_URL}/api/v1/timeline`,
-    UPCOMING_ELECTIONS: `${API_BASE_URL}/api/v1/upcoming-elections`,
-    ELIGIBILITY_CHECK: `${API_BASE_URL}/api/v1/eligibility-check`,
-    ASK: `${API_BASE_URL}/api/v1/ask`,
-  }
+const getEnv = (key: string, defaultValue: string): string => {
+  return (import.meta.env[key] as string) || defaultValue;
+};
+
+export const API_BASE_URL = getEnv('VITE_API_URL', 'http://localhost:8080');
+export const API_V1_PATH = '/api/v1';
+export const API_URL = `${API_BASE_URL}${API_V1_PATH}`;
+
+export const CONFIG = {
+  PROJECT_NAME: 'BallotBeacon AI',
+  API_URL,
 };

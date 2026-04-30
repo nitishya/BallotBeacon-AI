@@ -3,7 +3,7 @@ import { Send, Bot, User, AlertCircle } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../store/LanguageContext';
-import { config } from '../config';
+import { API_URL } from '../config';
 
 interface Message {
   id: string;
@@ -57,7 +57,7 @@ export default function AskAI() {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`${config.ENDPOINTS.ASK}?lang=${language}`, {
+      const res = await fetch(`${API_URL}/ask?lang=${language}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: userMessage })
