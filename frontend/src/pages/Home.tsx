@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Clock, ShieldCheck, HelpCircle, MapPin } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Clock, ShieldCheck, HelpCircle, MapPin, Calendar, CheckCircle, Timer } from 'lucide-react';
 import { useLanguage } from '../store/LanguageContext';
 import { API_URL } from '../config';
 
@@ -9,6 +9,7 @@ interface UpcomingElection {
   state: string;
   date: string;
   date_iso: string;
+  type: 'Voting' | 'Counting';
 }
 
 function getElectionStatus(dateIso: string, lang: string) {
@@ -25,19 +26,22 @@ function getElectionStatus(dateIso: string, lang: string) {
     return {
       type: 'upcoming',
       text: lang === 'en' ? `${diffDays} days left` : `${diffDays} दिन शेष`,
-      color: 'bg-indigo-100 text-indigo-700 border-indigo-200'
+      color: 'bg-orange-100 text-orange-700 border-orange-200',
+      icon: <Timer size={16} className="text-orange-600" />
     };
   } else if (diffDays === 0) {
     return {
       type: 'today',
-      text: lang === 'en' ? "Today / Ongoing" : "आज / जारी",
-      color: 'bg-emerald-100 text-emerald-700 border-emerald-200 animate-pulse'
+      text: lang === 'en' ? "Ongoing" : "जारी",
+      color: 'bg-emerald-100 text-emerald-700 border-emerald-200 animate-pulse',
+      icon: <Timer size={16} className="text-emerald-600" />
     };
   } else {
     return {
       type: 'completed',
       text: lang === 'en' ? "Completed" : "पूर्ण",
-      color: 'bg-slate-100 text-slate-500 border-slate-200 opacity-75'
+      color: 'bg-slate-100 text-slate-500 border-slate-200',
+      icon: <CheckCircle size={16} className="text-slate-400" />
     };
   }
 }
@@ -97,30 +101,87 @@ export default function Home() {
 
       {/* Upcoming Elections Banner */}
       {elections.length > 0 && (
-        <section className="w-full bg-white border-y border-slate-100 py-10 shadow-sm">
+        <section className="w-full bg-slate-50 border-y border-slate-200 py-16">
           <div className="container mx-auto px-4">
-            <h3 className="text-center text-xl font-bold text-slate-800 mb-8 flex justify-center items-center gap-2">
-              <Clock className="text-orange-600" size={24} /> 
-              {language === 'en' ? "2026 Election Countdown" : "2026 चुनाव उलटी गिनती"}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-black mb-4"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+              >
+                {language === 'en' ? "Elections " : "चुनाव "}
+                <span className="relative inline-block">
+                  <span className="relative z-10 text-indigo-600">2026</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-indigo-100 -z-10 transform -rotate-1"></span>
+                </span>
+              </motion.h2>
+              <p className="text-slate-500 font-medium">
+                {language === 'en' ? "Official schedule and live tracking" : "आधिकारिक कार्यक्रम और लाइव ट्रैकिंग"}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {elections.map((el, i) => {
                 const status = getElectionStatus(el.date_iso, language);
+                const isCounting = el.type === 'Counting';
+
                 return (
                   <motion.div 
                     key={i} 
-                    className="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col gap-3 hover:shadow-md transition-shadow"
-                    whileHover={{ y: -5 }}
+                    className={cn(
+                      "group relative p-1 rounded-[2rem] transition-all",
+                      status.type === 'upcoming' ? "bg-gradient-to-br from-indigo-500 to-purple-600 shadow-indigo-200 shadow-xl" : "bg-white border border-slate-200"
+                    )}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ y: -8 }}
                   >
-                    <div className="flex justify-between items-start">
-                      <span className="font-bold text-lg text-slate-900">{el.state}</span>
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold border ${status.color}`}>
-                        {status.text}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 text-slate-600 text-sm">
-                      <MapPin size={16} className="text-indigo-600" />
-                      <span>{el.date}</span>
+                    <div className={cn(
+                      "h-full w-full rounded-[1.8rem] p-6 flex flex-col justify-between",
+                      status.type === 'upcoming' ? "bg-white" : "bg-white"
+                    )}>
+                      <div>
+                        <div className="flex justify-between items-start mb-4">
+                          <div className={cn(
+                            "w-12 h-12 rounded-2xl flex items-center justify-center",
+                            status.type === 'upcoming' ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"
+                          )}>
+                            {isCounting ? <Timer size={24} /> : <Calendar size={24} />}
+                          </div>
+                          <span className={cn(
+                            "px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border",
+                            status.color
+                          )}>
+                            <span className="flex items-center gap-1.5">
+                              {status.icon}
+                              {status.text}
+                            </span>
+                          </span>
+                        </div>
+                        
+                        <h4 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
+                          {el.state}
+                        </h4>
+                        <p className="text-slate-400 text-sm font-semibold uppercase tracking-widest mb-4">
+                          {el.type === 'Voting' 
+                            ? (language === 'en' ? "General Voting" : "सामान्य मतदान") 
+                            : (language === 'en' ? "Results Counting" : "परिणाम गणना")
+                          }
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                        <div className="bg-indigo-50 p-2 rounded-lg">
+                          <Calendar size={18} className="text-indigo-600" />
+                        </div>
+                        <div>
+                          <p className="text-xs text-slate-400 font-bold uppercase">{language === 'en' ? "Election Date" : "चुनाव की तारीख"}</p>
+                          <p className="text-sm font-bold text-slate-700">{el.date}</p>
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 );
