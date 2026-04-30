@@ -1,3 +1,4 @@
+# Final Unified Build - Triggered at 2026-04-30
 FROM node:22-alpine AS frontend-build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
