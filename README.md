@@ -7,8 +7,8 @@ Smart Election Guide for the Indian Election Process.
 - **Deployment**: Google Cloud Run (Unified Build)
 - **Project ID**: `ballotbeacon-ai`
 
-### Cloud Build Trigger Tip
-If your deployment fails with "no branch matching pattern", ensure your Cloud Build trigger is set to track the **`main`** branch (or `master` if your GCP default is older). I have pushed to both branches to ensure compatibility.
+### Cloud Build Trigger
+Ensure your Cloud Build trigger is set to track the **`^main$`** branch pattern.
 
 Your Smart Election Process Guide. An AI-powered assistant that helps users understand the election process, timelines, eligibility, required documents, and voting steps in an interactive and easy-to-follow way.
 
