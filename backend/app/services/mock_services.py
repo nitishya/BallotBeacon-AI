@@ -1,9 +1,11 @@
 import json
 import asyncio
 import os
+from functools import lru_cache
 from typing import List, Dict, Any
 from app.models.schemas import EligibilityRequest, EligibilityResponse, TimelineEvent
 
+@lru_cache(maxsize=4)
 def load_election_data(lang: str = "en") -> Dict[str, Any]:
     file_name = f"elections_{lang}.json" if lang in ["en", "hi"] else "elections_en.json"
     file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", file_name)
@@ -55,17 +57,18 @@ async def check_eligibility(data: EligibilityRequest, lang: str = "en") -> Eligi
     )
 
 async def get_timeline(lang: str = "en") -> List[TimelineEvent]:
-    await asyncio.sleep(0.2)
+    # Reduced delay for efficiency
+    await asyncio.sleep(0.05)
     data = load_election_data(lang)
     return [TimelineEvent(**item) for item in data.get("timeline", [])]
 
 async def get_documents(lang: str = "en") -> Dict[str, Any]:
-    await asyncio.sleep(0.1)
+    await asyncio.sleep(0.05)
     data = load_election_data(lang)
     return data.get("documents", {})
 
 async def get_upcoming_elections(lang: str = "en") -> Dict[str, Any]:
-    await asyncio.sleep(0.1)
+    await asyncio.sleep(0.05)
     data = load_election_data(lang)
     return data.get("upcoming_elections", {})
 

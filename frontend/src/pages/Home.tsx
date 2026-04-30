@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Clock, ShieldCheck, HelpCircle, MapPin, Calendar, CheckCircle, Timer } from 'lucide-react';
@@ -123,70 +123,9 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {elections.map((el, i) => {
-                const status = getElectionStatus(el.date_iso, language);
-                const isCounting = el.type === 'Counting';
-
-                return (
-                  <motion.div 
-                    key={i} 
-                    className={cn(
-                      "group relative p-1 rounded-[2rem] transition-all",
-                      status.type === 'upcoming' ? "bg-gradient-to-br from-indigo-500 to-purple-600 shadow-indigo-200 shadow-xl" : "bg-white border border-slate-200"
-                    )}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    whileHover={{ y: -8 }}
-                  >
-                    <div className={cn(
-                      "h-full w-full rounded-[1.8rem] p-6 flex flex-col justify-between",
-                      status.type === 'upcoming' ? "bg-white" : "bg-white"
-                    )}>
-                      <div>
-                        <div className="flex justify-between items-start mb-4">
-                          <div className={cn(
-                            "w-12 h-12 rounded-2xl flex items-center justify-center",
-                            status.type === 'upcoming' ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"
-                          )}>
-                            {isCounting ? <Timer size={24} aria-hidden="true" /> : <Calendar size={24} aria-hidden="true" />}
-                          </div>
-                          <span className={cn(
-                            "px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border",
-                            status.color
-                          )}>
-                            <span className="flex items-center gap-1.5">
-                              {status.icon}
-                              {status.text}
-                            </span>
-                          </span>
-                        </div>
-                        
-                        <h4 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
-                          {el.state}
-                        </h4>
-                        <p className="text-slate-400 text-sm font-semibold uppercase tracking-widest mb-4">
-                          {el.type === 'Voting' 
-                            ? (language === 'en' ? "General Voting" : "सामान्य मतदान") 
-                            : (language === 'en' ? "Results Counting" : "परिणाम गणना")
-                          }
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-3 pt-4 border-t border-slate-100" aria-hidden="true">
-                        <div className="bg-indigo-50 p-2 rounded-lg">
-                          <Calendar size={18} className="text-indigo-600" />
-                        </div>
-                        <div>
-                          <p className="text-xs text-slate-400 font-bold uppercase">{language === 'en' ? "Election Date" : "चुनाव की तारीख"}</p>
-                          <p className="text-sm font-bold text-slate-700">{el.date}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+              {elections.map((el, i) => (
+                <ElectionItem key={i} el={el} language={language} index={i} />
+              ))}
             </div>
           </div>
         </section>
@@ -229,20 +168,79 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description, link }: { icon: React.ReactNode, title: string, description: string, link: string }) {
+const ElectionItem = memo(({ el, language, index }: { el: UpcomingElection, language: string, index: number }) => {
+  const status = getElectionStatus(el.date_iso, language);
+  const isCounting = el.type === 'Counting';
+
   return (
-    <Link 
-      to={link}
-      className="group flex flex-col p-6 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-indigo-200 hover:shadow-lg transition-all focus-visible:outline-indigo-600 focus-visible:outline-offset-4 focus-visible:outline-4"
+    <motion.div 
+      className={cn(
+        "group relative p-1 rounded-[2rem] transition-all",
+        status.type === 'upcoming' ? "bg-gradient-to-br from-indigo-500 to-purple-600 shadow-indigo-200 shadow-xl" : "bg-white border border-slate-200"
+      )}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      whileHover={{ y: -8 }}
     >
-      <div 
-        className="w-14 h-14 rounded-xl bg-slate-50 border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-        aria-hidden="true"
-      >
-        {icon}
+      <div className="h-full w-full rounded-[1.8rem] p-6 flex flex-col justify-between bg-white">
+        <div>
+          <div className="flex justify-between items-start mb-4">
+            <div className={cn(
+              "w-12 h-12 rounded-2xl flex items-center justify-center",
+              status.type === 'upcoming' ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"
+            )}>
+              {isCounting ? <Timer size={24} aria-hidden="true" /> : <Calendar size={24} aria-hidden="true" />}
+            </div>
+            <span className={cn(
+              "px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border",
+              status.color
+            )}>
+              <span className="flex items-center gap-1.5">
+                {status.icon}
+                {status.text}
+              </span>
+            </span>
+          </div>
+          
+          <h4 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
+            {el.state}
+          </h4>
+          <p className="text-slate-400 text-sm font-semibold uppercase tracking-widest mb-4">
+            {el.type === 'Voting' 
+              ? (language === 'en' ? "General Voting" : "सामान्य मतदान") 
+              : (language === 'en' ? "Results Counting" : "परिणाम गणना")
+            }
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3 pt-4 border-t border-slate-100" aria-hidden="true">
+          <div className="bg-indigo-50 p-2 rounded-lg">
+            <Calendar size={18} className="text-indigo-600" />
+          </div>
+          <div>
+            <p className="text-xs text-slate-400 font-bold uppercase">{language === 'en' ? "Election Date" : "चुनाव की तारीख"}</p>
+            <p className="text-sm font-bold text-slate-700">{el.date}</p>
+          </div>
+        </div>
       </div>
-      <h3 className="text-xl font-bold mb-2 group-hover:text-indigo-600 transition-colors">{title}</h3>
-      <p className="text-slate-600 flex-1">{description}</p>
-    </Link>
+    </motion.div>
   );
-}
+});
+
+const FeatureCard = memo(({ icon, title, description, link }: { icon: React.ReactNode, title: string, description: string, link: string }) => (
+  <Link 
+    to={link}
+    className="group flex flex-col p-6 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-indigo-200 hover:shadow-lg transition-all focus-visible:outline-indigo-600 focus-visible:outline-offset-4 focus-visible:outline-4"
+  >
+    <div 
+      className="w-14 h-14 rounded-xl bg-slate-50 border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+      aria-hidden="true"
+    >
+      {icon}
+    </div>
+    <h3 className="text-xl font-bold mb-2 group-hover:text-indigo-600 transition-colors">{title}</h3>
+    <p className="text-slate-600 flex-1">{description}</p>
+  </Link>
+));
