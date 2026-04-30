@@ -1,6 +1,6 @@
-# Final Unified Build - Triggered at 2026-04-30
+# Final Unified Build - BUILD_ID: v4.1 (2026-04-30 13:46)
 FROM node:18-alpine AS frontend-build
-RUN echo "BUILD_MARKER_V3_SWC_NODE18" && ls -la
+RUN echo "RUNNING BUILD VERSION: v4.1" && ls -la
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 # Nuclear clean: remove any leaked node_modules or lockfiles before install
