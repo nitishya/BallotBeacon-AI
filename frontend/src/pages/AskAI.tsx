@@ -84,7 +84,7 @@ export default function AskAI() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-3xl h-[calc(100vh-10rem)] flex flex-col">
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-3xl h-[calc(100dvh-10rem)] flex flex-col">
       <div className="text-center mb-6 shrink-0">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 mb-4" aria-hidden="true">
           <ShieldCheck size={32} />
@@ -117,7 +117,7 @@ export default function AskAI() {
                 {msg.sender === 'user' ? <User size={20} /> : <Bot size={20} />}
               </div>
               <div className={cn(
-                "p-4 rounded-2xl text-[15px] leading-relaxed",
+                "p-3 sm:p-4 rounded-2xl text-sm sm:text-[15px] leading-relaxed",
                 msg.sender === 'user' 
                   ? "bg-indigo-600 text-white rounded-tr-none" 
                   : "bg-slate-100 text-slate-800 rounded-tl-none"
@@ -158,10 +158,10 @@ export default function AskAI() {
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="absolute right-2 p-2.5 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 disabled:opacity-50 transition-colors focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
+              className="absolute right-2 p-3 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 disabled:opacity-50 transition-colors focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
               aria-label="Send message"
             >
-              <Send size={20} className="ml-0.5" />
+              <Send size={18} className="ml-0.5" />
             </button>
           </form>
           <div className="mt-2 text-center text-xs text-slate-500 flex items-center justify-center gap-1" aria-hidden="true">

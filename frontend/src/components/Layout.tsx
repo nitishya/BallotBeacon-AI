@@ -110,9 +110,9 @@ export function Layout() {
             </div>
 
             {/* Center Column */}
-            <div className="flex flex-col items-center md:items-center gap-4">
+            <div className="flex flex-col items-center gap-4">
               <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Connect</h4>
-              <div className="flex flex-col gap-3 items-center md:items-center text-sm font-medium">
+              <div className="flex flex-col gap-3 items-center text-sm font-medium">
                 <a 
                   href="https://www.linkedin.com/in/nitishyadav866/" 
                   target="_blank" 
@@ -143,10 +143,10 @@ export function Layout() {
           </div>
 
           {/* Bottom Section */}
-          <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em]">
+          <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-center md:text-left font-black uppercase tracking-[0.2em]">
             <p>© 2026 BallotBeacon AI. All rights reserved.</p>
-            <p>
-              Developed by <span className="text-white font-bold">Nitish Kumar Yadav</span> • Delhi, India 🇮🇳
+            <p className="flex items-center gap-1">
+              Developed by <span className="text-white font-bold">Nitish Kumar Yadav</span> <span className="hidden sm:inline">•</span> Delhi, India 🇮🇳
             </p>
           </div>
         </div>

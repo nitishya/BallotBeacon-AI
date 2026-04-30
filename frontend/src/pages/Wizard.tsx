@@ -98,7 +98,7 @@ export default function Wizard() {
         </div>
       </div>
 
-      <div className="space-y-6 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
+      <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
         {events.map((event, index) => {
           const isCompleted = completedSteps.has(index);
           return (
@@ -111,7 +111,7 @@ export default function Wizard() {
             >
               {/* Icon */}
               <div className={cn(
-                "flex items-center justify-center w-12 h-12 rounded-full border-4 border-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 cursor-pointer transition-colors focus-visible:outline-indigo-600",
+                "flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-4 border-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 cursor-pointer transition-colors focus-visible:outline-indigo-600",
                 isCompleted ? "bg-emerald-500 text-white" : "bg-orange-100 text-orange-600 hover:bg-orange-200"
               )}
               onClick={() => toggleStep(index)}
@@ -127,7 +127,7 @@ export default function Wizard() {
               {/* Card */}
               <div 
                 className={cn(
-                  "w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition-all",
+                  "w-[calc(100%-3rem)] sm:w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-4 sm:p-5 rounded-xl border bg-white shadow-sm hover:shadow-md transition-all",
                   event.link ? "cursor-pointer hover:border-indigo-300" : ""
                 )}
                 onClick={() => {

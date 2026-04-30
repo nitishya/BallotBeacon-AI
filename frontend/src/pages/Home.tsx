@@ -68,7 +68,7 @@ export default function Home() {
       <section className="w-full py-20 md:py-32 bg-gradient-to-br from-indigo-50 via-white to-orange-50">
         <div className="container mx-auto px-4 text-center">
           <motion.h1 
-            className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
+            className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -136,7 +136,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">{t('home.features.title')}</h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
             <FeatureCard 
               icon={<CheckCircle2 className="text-emerald-500" size={32} />}
               title={language === 'en' ? "Eligibility Check" : "पात्रता जांचें"}
