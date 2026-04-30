@@ -93,23 +93,59 @@ export function Layout() {
       </main>
 
       <footer className={cn(
-        "py-6 border-t mt-auto text-center text-sm",
-        highContrast ? "border-white bg-black" : "border-slate-200 bg-slate-900 text-slate-400"
+        "py-16 border-t mt-auto",
+        highContrast ? "border-white bg-black" : "border-slate-800 bg-slate-950 text-slate-400"
       )}>
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6">
-          <p>
-            <span className="font-bold bg-gradient-to-r from-indigo-400 to-orange-400 bg-clip-text text-transparent mr-1">BallotBeacon AI</span>
-            © {new Date().getFullYear()}
-          </p>
-          <div className="hidden md:block w-1 h-1 rounded-full bg-slate-600"></div>
-          <p>
-            {t('footer.developedBy')} <span className="font-semibold text-white">{t('footer.developerName')}</span>
-          </p>
-          <div className="hidden md:block w-1 h-1 rounded-full bg-slate-600"></div>
-          <p className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-orange-500 inline-block"></span> 
-            {t('footer.place')}
-          </p>
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            {/* Left Column */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-2xl font-bold text-white">BallotBeacon AI</h3>
+              <p className="text-slate-400 leading-relaxed max-w-xs text-sm">
+                Next-generation election intelligence & voter guidance system. Built to optimize democratic participation and enhance the voting experience.
+              </p>
+            </div>
+
+            {/* Center Column */}
+            <div className="flex flex-col items-center md:items-center gap-4">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Connect</h4>
+              <div className="flex flex-col gap-3 items-center md:items-center text-sm font-medium">
+                <a 
+                  href="https://www.linkedin.com/in/nitishyadav866/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-indigo-400 transition-colors flex items-center gap-2"
+                >
+                  LinkedIn
+                </a>
+                <a 
+                  href="https://github.com/nitishya" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-indigo-400 transition-colors flex items-center gap-2"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="flex flex-col md:items-end gap-4">
+              <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Legal</h4>
+              <div className="flex flex-col gap-3 md:items-end text-sm font-medium">
+                <a href="#" className="hover:text-indigo-400 transition-colors">Privacy Policy</a>
+                <a href="#" className="hover:text-indigo-400 transition-colors">Terms of Service</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Section */}
+          <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em]">
+            <p>© 2026 BallotBeacon AI. All rights reserved.</p>
+            <p>
+              Developed by <span className="text-white font-bold">Nitish Kumar Yadav</span> • Delhi, India 🇮🇳
+            </p>
+          </div>
         </div>
       </footer>
     </div>
