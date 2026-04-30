@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Clock, ShieldCheck, HelpCircle, MapPin, Calendar, CheckCircle, Timer } from 'lucide-react';
+import { cn } from '../lib/utils';
 import { useLanguage } from '../store/LanguageContext';
 import { API_URL } from '../config';
 
