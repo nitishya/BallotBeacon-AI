@@ -4,10 +4,10 @@ RUN echo "BUILD_MARKER_V3_SWC_NODE18" && ls -la
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 # Nuclear clean: remove any leaked node_modules or lockfiles before install
-RUN rm -rf node_modules package-lock.json && npm install
+RUN rm -rf node_modules package-lock.json && npm install --legacy-peer-deps
 COPY frontend/ .
 # Also remove any node_modules that might have been copied by the previous step
-RUN rm -rf node_modules && npm install
+RUN rm -rf node_modules && npm install --legacy-peer-deps
 ENV NODE_ENV=production
 RUN npm run build
 
