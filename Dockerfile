@@ -1,10 +1,11 @@
-# --- Stage 1: Build Frontend ---
 FROM node:18-alpine AS frontend-build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
-RUN npm ci
+# Using install instead of ci to be more resilient to lockfile mismatches
+RUN npm install
 COPY frontend/ .
-# In a unified build, the API is served from the same origin
+# Ensure production environment
+ENV NODE_ENV=production
 ENV VITE_API_URL=""
 RUN npm run build
 

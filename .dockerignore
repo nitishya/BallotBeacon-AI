@@ -1,0 +1,20 @@
+# Git
+.git
+.gitignore
+
+# Frontend
+frontend/node_modules
+frontend/dist
+frontend/.vite
+
+# Backend
+backend/venv
+backend/__pycache__
+backend/.pytest_cache
+backend/.env
+
+# Local
+.DS_Store
+deploy.sh
+Dockerfile
+README.md
