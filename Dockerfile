@@ -1,12 +1,10 @@
-FROM node:18-alpine AS frontend-build
+FROM node:20-alpine AS frontend-build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
-# Using install instead of ci to be more resilient to lockfile mismatches
+# Clean install to ensure no version conflicts
 RUN npm install
 COPY frontend/ .
-# Ensure production environment
 ENV NODE_ENV=production
-ENV VITE_API_URL=""
 RUN npm run build
 
 # --- Stage 2: Build Backend & Serve Frontend ---
