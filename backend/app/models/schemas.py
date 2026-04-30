@@ -19,7 +19,7 @@ class TimelineEvent(BaseModel):
     link: Optional[str] = None
 
 class AskRequest(BaseModel):
-    question: str = Field(..., min_length=5, max_length=500)
+    question: str = Field(..., min_length=1, max_length=500)
 
 class AskResponse(BaseModel):
     answer: str

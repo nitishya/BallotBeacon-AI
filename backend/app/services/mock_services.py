@@ -84,6 +84,8 @@ async def ask_gemini_mock(question: str, lang: str = "en") -> str:
             return "आप electoralsearch.eci.gov.in पर जाकर मतदाता सूची में अपना नाम जांच सकते हैं।"
         return "चुनाव प्रक्रिया के बारे में आपके प्रश्न के लिए धन्यवाद। चुनाव आयोग (ECI) की आधिकारिक वेबसाइट (eci.gov.in) पर अधिक जानकारी प्राप्त करें। ध्यान दें: मैं किसी भी राजनीतिक दल या उम्मीदवार का समर्थन नहीं करता।"
     else:
+        if any(greet in q for greet in ["hi", "hello", "hey", "namaste"]):
+            return "Hello! I'm your BallotBeacon AI assistant. How can I help you with the Indian election process today?"
         if "evm" in q or "vvpat" in q:
             return "EVMs (Electronic Voting Machines) are used for casting votes. The VVPAT (Voter Verifiable Paper Audit Trail) allows you to verify your vote. After pressing the button on the EVM, a paper slip is printed and visible through a glass window for 7 seconds."
         elif "register" in q or "enroll" in q:
