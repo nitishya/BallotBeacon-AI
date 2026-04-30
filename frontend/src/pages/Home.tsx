@@ -7,7 +7,39 @@ import { API_URL } from '../config';
 
 interface UpcomingElection {
   state: string;
-  expected_month: string;
+  date: string;
+  date_iso: string;
+}
+
+function getElectionStatus(dateIso: string, lang: string) {
+  const targetDate = new Date(dateIso);
+  const now = new Date();
+  
+  targetDate.setHours(0, 0, 0, 0);
+  now.setHours(0, 0, 0, 0);
+  
+  const diffTime = targetDate.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays > 0) {
+    return {
+      type: 'upcoming',
+      text: lang === 'en' ? `${diffDays} days left` : `${diffDays} दिन शेष`,
+      color: 'bg-indigo-100 text-indigo-700 border-indigo-200'
+    };
+  } else if (diffDays === 0) {
+    return {
+      type: 'today',
+      text: lang === 'en' ? "Today / Ongoing" : "आज / जारी",
+      color: 'bg-emerald-100 text-emerald-700 border-emerald-200 animate-pulse'
+    };
+  } else {
+    return {
+      type: 'completed',
+      text: lang === 'en' ? "Completed" : "पूर्ण",
+      color: 'bg-slate-100 text-slate-500 border-slate-200 opacity-75'
+    };
+  }
 }
 
 export default function Home() {
@@ -65,18 +97,34 @@ export default function Home() {
 
       {/* Upcoming Elections Banner */}
       {elections.length > 0 && (
-        <section className="w-full bg-orange-50 border-y border-orange-100 py-6">
+        <section className="w-full bg-white border-y border-slate-100 py-10 shadow-sm">
           <div className="container mx-auto px-4">
-            <h3 className="text-center font-bold text-orange-800 mb-4 flex justify-center items-center gap-2">
-              <MapPin size={20} /> 
-              {language === 'en' ? "Upcoming 2026 Assembly Elections" : "आगामी 2026 विधानसभा चुनाव"}
+            <h3 className="text-center text-xl font-bold text-slate-800 mb-8 flex justify-center items-center gap-2">
+              <Clock className="text-orange-600" size={24} /> 
+              {language === 'en' ? "2026 Election Countdown" : "2026 चुनाव उलटी गिनती"}
             </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {elections.map((el, i) => (
-                <div key={i} className="bg-white px-4 py-2 rounded-lg shadow-sm border border-orange-200 text-sm font-medium text-slate-700">
-                  <span className="font-bold text-indigo-700">{el.state}</span> • {el.expected_month}
-                </div>
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {elections.map((el, i) => {
+                const status = getElectionStatus(el.date_iso, language);
+                return (
+                  <motion.div 
+                    key={i} 
+                    className="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col gap-3 hover:shadow-md transition-shadow"
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="flex justify-between items-start">
+                      <span className="font-bold text-lg text-slate-900">{el.state}</span>
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold border ${status.color}`}>
+                        {status.text}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-600 text-sm">
+                      <MapPin size={16} className="text-indigo-600" />
+                      <span>{el.date}</span>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>

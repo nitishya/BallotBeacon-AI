@@ -1,11 +1,12 @@
 {
   "upcoming_elections": {
     "assembly_2026": [
-      { "state": "Assam", "expected_month": "April-May 2026" },
-      { "state": "Kerala", "expected_month": "April-May 2026" },
-      { "state": "Tamil Nadu", "expected_month": "April-May 2026" },
-      { "state": "West Bengal", "expected_month": "April-May 2026" },
-      { "state": "Puducherry", "expected_month": "April-May 2026" }
+      { "state": "West Bengal (Phase 8)", "date": "May 10, 2026", "date_iso": "2026-05-10" },
+      { "state": "Assam (Bye-elections)", "date": "May 20, 2026", "date_iso": "2026-05-20" },
+      { "state": "Tamil Nadu (Completed)", "date": "April 6, 2026", "date_iso": "2026-04-06" },
+      { "state": "Kerala (Completed)", "date": "April 6, 2026", "date_iso": "2026-04-06" },
+      { "state": "Puducherry (Completed)", "date": "April 6, 2026", "date_iso": "2026-04-06" },
+      { "state": "Punjab (Municipal)", "date": "June 15, 2026", "date_iso": "2026-06-15" }
     ],
     "lok_sabha": {
       "cycle": "2029",

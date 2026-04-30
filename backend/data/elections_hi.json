@@ -1,11 +1,12 @@
 {
   "upcoming_elections": {
     "assembly_2026": [
-      { "state": "असम (Assam)", "expected_month": "अप्रैल-मई 2026" },
-      { "state": "केरल (Kerala)", "expected_month": "अप्रैल-मई 2026" },
-      { "state": "तमिलनाडु (Tamil Nadu)", "expected_month": "अप्रैल-मई 2026" },
-      { "state": "पश्चिम बंगाल (West Bengal)", "expected_month": "अप्रैल-मई 2026" },
-      { "state": "पुडुचेरी (Puducherry)", "expected_month": "अप्रैल-मई 2026" }
+      { "state": "पश्चिम बंगाल (चरण 8)", "date": "10 मई, 2026", "date_iso": "2026-05-10" },
+      { "state": "असम (उपचुनाव)", "date": "20 मई, 2026", "date_iso": "2026-05-20" },
+      { "state": "तमिलनाडु (पूर्ण)", "date": "6 अप्रैल, 2026", "date_iso": "2026-04-06" },
+      { "state": "केरल (पूर्ण)", "date": "6 अप्रैल, 2026", "date_iso": "2026-04-06" },
+      { "state": "पुडुचेरी (पूर्ण)", "date": "6 अप्रैल, 2026", "date_iso": "2026-04-06" },
+      { "state": "पंजाब (नगर पालिका)", "date": "15 जून, 2026", "date_iso": "2026-06-15" }
     ],
     "lok_sabha": {
       "cycle": "2029",
