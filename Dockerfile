@@ -1,10 +1,13 @@
 # Final Unified Build - Triggered at 2026-04-30
 FROM node:18-alpine AS frontend-build
+RUN echo "BUILD_MARKER_V3_SWC_NODE18" && ls -la
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
-# Clean install to ensure no version conflicts
-RUN npm install
+# Nuclear clean: remove any leaked node_modules or lockfiles before install
+RUN rm -rf node_modules package-lock.json && npm install
 COPY frontend/ .
+# Also remove any node_modules that might have been copied by the previous step
+RUN rm -rf node_modules && npm install
 ENV NODE_ENV=production
 RUN npm run build
 
