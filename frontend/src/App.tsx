@@ -18,39 +18,45 @@ const PageLoader = () => (
   </div>
 );
 
+export function AppContent() {
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={
+          <Suspense fallback={<PageLoader />}>
+            <Home />
+          </Suspense>
+        } />
+        <Route path="wizard" element={
+          <Suspense fallback={<PageLoader />}>
+            <Wizard />
+          </Suspense>
+        } />
+        <Route path="eligibility" element={
+          <Suspense fallback={<PageLoader />}>
+            <Eligibility />
+          </Suspense>
+        } />
+        <Route path="documents" element={
+          <Suspense fallback={<PageLoader />}>
+            <Documents />
+          </Suspense>
+        } />
+        <Route path="ask" element={
+          <Suspense fallback={<PageLoader />}>
+            <AskAI />
+          </Suspense>
+        } />
+      </Route>
+    </Routes>
+  );
+}
+
 function App() {
   return (
     <LanguageProvider>
       <Router>
-        <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={
-            <Suspense fallback={<PageLoader />}>
-              <Home />
-            </Suspense>
-          } />
-          <Route path="wizard" element={
-            <Suspense fallback={<PageLoader />}>
-              <Wizard />
-            </Suspense>
-          } />
-          <Route path="eligibility" element={
-            <Suspense fallback={<PageLoader />}>
-              <Eligibility />
-            </Suspense>
-          } />
-          <Route path="documents" element={
-            <Suspense fallback={<PageLoader />}>
-              <Documents />
-            </Suspense>
-          } />
-          <Route path="ask" element={
-            <Suspense fallback={<PageLoader />}>
-              <AskAI />
-            </Suspense>
-          } />
-        </Route>
-      </Routes>
+        <AppContent />
       </Router>
     </LanguageProvider>
   );

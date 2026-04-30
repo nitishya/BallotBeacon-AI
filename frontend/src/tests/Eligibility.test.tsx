@@ -45,4 +45,22 @@ describe('Eligibility Component', () => {
       expect(screen.getByText(/You appear eligible to vote!/i)).toBeInTheDocument();
     });
   });
+
+  it('handles API errors gracefully', async () => {
+    (fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+      ok: false,
+      status: 500
+    });
+
+    renderWithLang(<Eligibility />);
+    
+    fireEvent.change(screen.getByLabelText(/Age/i), { target: { value: '25' } });
+    fireEvent.change(screen.getByLabelText(/State/i), { target: { value: 'Maharashtra' } });
+    
+    fireEvent.click(screen.getByRole('button', { name: /Check Eligibility/i }));
+    
+    await waitFor(() => {
+      expect(screen.getByText(/Unable to connect to the server. Please try again later./i)).toBeInTheDocument();
+    });
+  });
 });
