@@ -77,7 +77,7 @@ export default function Eligibility() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-3xl">
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 mb-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 mb-4" aria-hidden="true">
           <ShieldCheck size={32} />
         </div>
         <h1 className="text-4xl font-bold mb-4">{t.title}</h1>
@@ -186,7 +186,7 @@ export default function Eligibility() {
 
       {error && (
         <div className="mt-8 p-4 bg-red-50 text-red-700 border border-red-200 rounded-xl flex items-start gap-3" role="alert">
-          <AlertCircle className="shrink-0 mt-0.5" />
+          <AlertCircle className="shrink-0 mt-0.5" aria-hidden="true" />
           <p>{error}</p>
         </div>
       )}
@@ -204,9 +204,9 @@ export default function Eligibility() {
         >
           <div className="flex items-center gap-4 mb-4">
             {result.is_eligible ? (
-              <CheckCircle className="text-emerald-600 w-10 h-10" />
+              <CheckCircle className="text-emerald-600 w-10 h-10" aria-hidden="true" />
             ) : (
-              <XCircle className="text-red-600 w-10 h-10" />
+              <XCircle className="text-red-600 w-10 h-10" aria-hidden="true" />
             )}
             <h2 className={cn(
               "text-2xl font-bold",

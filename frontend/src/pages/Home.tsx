@@ -150,7 +150,7 @@ export default function Home() {
                             "w-12 h-12 rounded-2xl flex items-center justify-center",
                             status.type === 'upcoming' ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"
                           )}>
-                            {isCounting ? <Timer size={24} /> : <Calendar size={24} />}
+                            {isCounting ? <Timer size={24} aria-hidden="true" /> : <Calendar size={24} aria-hidden="true" />}
                           </div>
                           <span className={cn(
                             "px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border",
@@ -174,7 +174,7 @@ export default function Home() {
                         </p>
                       </div>
 
-                      <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                      <div className="flex items-center gap-3 pt-4 border-t border-slate-100" aria-hidden="true">
                         <div className="bg-indigo-50 p-2 rounded-lg">
                           <Calendar size={18} className="text-indigo-600" />
                         </div>
@@ -235,7 +235,10 @@ function FeatureCard({ icon, title, description, link }: { icon: React.ReactNode
       to={link}
       className="group flex flex-col p-6 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-indigo-200 hover:shadow-lg transition-all focus-visible:outline-indigo-600 focus-visible:outline-offset-4 focus-visible:outline-4"
     >
-      <div className="w-14 h-14 rounded-xl bg-slate-50 border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+      <div 
+        className="w-14 h-14 rounded-xl bg-slate-50 border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+        aria-hidden="true"
+      >
         {icon}
       </div>
       <h3 className="text-xl font-bold mb-2 group-hover:text-indigo-600 transition-colors">{title}</h3>

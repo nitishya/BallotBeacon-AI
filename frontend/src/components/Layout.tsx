@@ -10,12 +10,15 @@ export function Layout() {
   const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
+    // Update document language for screen readers
+    document.documentElement.lang = language;
+    
     if (highContrast) {
       document.documentElement.classList.add('forced-colors');
     } else {
       document.documentElement.classList.remove('forced-colors');
     }
-  }, [highContrast]);
+  }, [highContrast, language]);
 
   return (
     <div className={cn(
@@ -53,18 +56,18 @@ export function Layout() {
             <button
               onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
               className="p-2 flex items-center gap-1 font-semibold rounded-full hover:bg-slate-200 focus-visible:outline-indigo-600"
-              aria-label={`Switch language to ${language === 'en' ? 'Hindi' : 'English'}`}
+              aria-label={language === 'en' ? "Switch to Hindi language" : "हिन्दी भाषा में बदलें"}
             >
-              <Languages size={20} />
+              <Languages size={20} aria-hidden="true" />
               <span className="text-sm uppercase">{language}</span>
             </button>
             <button
               onClick={() => setHighContrast(!highContrast)}
               className="p-2 rounded-full hover:bg-slate-200 focus-visible:outline-indigo-600"
-              aria-label="Toggle High Contrast Mode"
+              aria-label={highContrast ? (language === 'en' ? "Disable High Contrast Mode" : "उच्च कंट्रास्ट मोड अक्षम करें") : (language === 'en' ? "Enable High Contrast Mode" : "उच्च कंट्रास्ट मोड सक्षम करें")}
               aria-pressed={highContrast}
             >
-              {highContrast ? <Sun size={20} /> : <Moon size={20} />}
+              {highContrast ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
             </button>
             <button 
               className="md:hidden p-2 hover:bg-slate-200 rounded-full focus-visible:outline-indigo-600"
@@ -72,7 +75,7 @@ export function Layout() {
               aria-expanded={isMenuOpen}
               aria-label="Toggle Menu"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </div>

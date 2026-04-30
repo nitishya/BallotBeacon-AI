@@ -72,7 +72,7 @@ export default function Wizard() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 mb-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 mb-4" aria-hidden="true">
           <Calendar size={32} />
         </div>
         <h1 className="text-4xl font-bold mb-4">{t.title}</h1>
@@ -121,7 +121,7 @@ export default function Wizard() {
               aria-pressed={isCompleted}
               aria-label={`${t.mark} ${event.title}`}
               >
-                {isCompleted ? <Check size={20} /> : <ChevronRight size={20} />}
+                {isCompleted ? <Check size={20} aria-hidden="true" /> : <ChevronRight size={20} aria-hidden="true" />}
               </div>
               
               {/* Card */}

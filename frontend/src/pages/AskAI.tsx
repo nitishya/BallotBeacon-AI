@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, AlertCircle } from 'lucide-react';
+import { Send, Bot, User, AlertCircle, ShieldCheck } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../store/LanguageContext';
@@ -86,8 +86,11 @@ export default function AskAI() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl h-[calc(100vh-10rem)] flex flex-col">
       <div className="text-center mb-6 shrink-0">
-        <h1 className="text-3xl font-bold mb-2">{t.title}</h1>
-        <p className="text-slate-600">{t.subtitle}</p>
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 mb-4" aria-hidden="true">
+          <ShieldCheck size={32} />
+        </div>
+        <h1 className="text-4xl font-bold mb-4">{t.title}</h1>
+        <p className="text-lg text-slate-600">{t.subtitle}</p>
       </div>
 
       <div className="flex-1 bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col overflow-hidden">
@@ -110,7 +113,7 @@ export default function AskAI() {
               <div className={cn(
                 "w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-1",
                 msg.sender === 'user' ? "bg-indigo-600 text-white" : "bg-orange-100 text-orange-600"
-              )}>
+              )} aria-hidden="true">
                 {msg.sender === 'user' ? <User size={20} /> : <Bot size={20} />}
               </div>
               <div className={cn(
@@ -125,7 +128,7 @@ export default function AskAI() {
           ))}
           {isLoading && (
             <div className="flex max-w-[85%] gap-4">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 mt-1">
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 mt-1" aria-hidden="true">
                 <Bot size={20} />
               </div>
               <div className="p-4 rounded-2xl bg-slate-100 text-slate-800 rounded-tl-none flex items-center gap-2">
@@ -161,7 +164,7 @@ export default function AskAI() {
               <Send size={20} className="ml-0.5" />
             </button>
           </form>
-          <div className="mt-2 text-center text-xs text-slate-500 flex items-center justify-center gap-1">
+          <div className="mt-2 text-center text-xs text-slate-500 flex items-center justify-center gap-1" aria-hidden="true">
             <AlertCircle size={12} />
             <span>{t.disclaimer}</span>
           </div>
