@@ -21,8 +21,8 @@ export default function Wizard() {
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
   const t = {
-    title: language === 'en' ? "Election Timeline Wizard" : "चुनाव समयरेखा विज़ार्ड",
-    subtitle: language === 'en' ? "Track your progress to election day based on ECI guidelines. Mark steps as complete." : "ECI दिशानिर्देशों के आधार पर चुनाव के दिन तक अपनी प्रगति को ट्रैक करें। चरणों को पूर्ण के रूप में चिह्नित करें।",
+    title: language === 'en' ? "Election Timeline" : "चुनाव समयरेखा",
+    subtitle: language === 'en' ? "Track your progress to election day based on ECI guidelines." : "ECI दिशानिर्देशों के आधार पर चुनाव के दिन तक अपनी प्रगति को ट्रैक करें।",
     progress: language === 'en' ? "Your Progress" : "आपकी प्रगति",
     complete: language === 'en' ? "Complete" : "पूर्ण",
     undo: language === 'en' ? "Undo step" : "चरण पूर्ववत करें",

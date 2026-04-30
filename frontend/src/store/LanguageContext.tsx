@@ -11,7 +11,7 @@ interface LanguageContextType {
 
 const translations = {
   en: {
-    "nav.wizard": "Process Wizard",
+    "nav.wizard": "Process",
     "nav.eligibility": "Eligibility",
     "nav.documents": "Documents",
     "nav.ask": "Ask AI",
@@ -31,7 +31,7 @@ const translations = {
     "footer.privacy": "Privacy Policy"
   },
   hi: {
-    "nav.wizard": "प्रक्रिया विज़ार्ड",
+    "nav.wizard": "प्रक्रिया",
     "nav.eligibility": "पात्रता",
     "nav.documents": "दस्तावेज़",
     "nav.ask": "AI से पूछें",
